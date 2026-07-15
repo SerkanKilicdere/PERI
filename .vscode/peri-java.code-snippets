@@ -1,0 +1,68 @@
+{
+    "Peri Spring Rest Controller": {
+        "scope": "java",
+        "prefix": "peri-controller",
+        "body": [
+            "package ${1:com.serkan.peri.controller};",
+            "",
+            "import org.springframework.web.bind.annotation.GetMapping;",
+            "import org.springframework.web.bind.annotation.RequestMapping;",
+            "import org.springframework.web.bind.annotation.RestController;",
+            "",
+            "@RestController",
+            "@RequestMapping(\"${2:/api/v1}\")",
+            "public class ${3:SampleController} {",
+            "",
+            "    @GetMapping(\"${4:/health}\")",
+            "    public String ${5:health}() {",
+            "        return \"${6:OK}\";",
+            "    }",
+            "}"
+        ],
+        "description": "Spring REST controller template for PERI project"
+    },
+    "Peri Post Mapping Method": {
+        "scope": "java",
+        "prefix": "peri-post",
+        "body": [
+            "@PostMapping(\"${1:/resource}\")",
+            "public ResponseEntity<${2:Object}> ${3:create}(@RequestBody ${4:Object} request) {",
+            "    return ResponseEntity.ok(${5:request});",
+            "}"
+        ],
+        "description": "Spring @PostMapping method template"
+    },
+    "Peri Put Mapping Method": {
+        "scope": "java",
+        "prefix": "peri-put",
+        "body": [
+            "@PutMapping(\"${1:/resource/{id}}\")",
+            "public ResponseEntity<${2:Object}> ${3:update}(@PathVariable Long id, @RequestBody ${4:Object} request) {",
+            "    return ResponseEntity.ok(${5:request});",
+            "}"
+        ],
+        "description": "Spring @PutMapping method template"
+    },
+    "Peri Delete Mapping Method": {
+        "scope": "java",
+        "prefix": "peri-delete",
+        "body": [
+            "@DeleteMapping(\"${1:/resource/{id}}\")",
+            "public ResponseEntity<Void> ${2:delete}(@PathVariable Long id) {",
+            "    return ResponseEntity.noContent().build();",
+            "}"
+        ],
+        "description": "Spring @DeleteMapping method template"
+    },
+    "Peri Patch Mapping Method": {
+        "scope": "java",
+        "prefix": "peri-patch",
+        "body": [
+            "@PatchMapping(\"${1:/resource/{id}}\")",
+            "public ResponseEntity<${2:Object}> ${3:patch}(@PathVariable Long id, @RequestBody ${4:Map<String, Object>} updates) {",
+            "    return ResponseEntity.ok(${5:null});",
+            "}"
+        ],
+        "description": "Spring @PatchMapping method template"
+    }
+}

@@ -1,0 +1,37 @@
+html {
+    scroll-behavior: smooth;
+    /* Navbar'ınız "sticky-top" (yapışkan) olduğu için, kaydırılan bölümün */
+    /* navbar'ın altında kalmasını engellemek adına padding-top ekliyoruz: */
+    scroll-padding-top: 85px;
+}
+.hero-image {
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    width: 100%;
+    max-height: 500px;
+}
+
+.feature-img {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 16px !important;
+    overflow: hidden;
+    border: none !important;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}

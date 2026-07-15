@@ -1,0 +1,13 @@
+[
+    {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "compile-peribackend",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+d",
+        "command": "workbench.action.debug.start",
+        "when": "editorTextFocus"
+    }
+]

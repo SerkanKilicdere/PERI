@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compile-peribackend",
+            "type": "shell",
+            "command": ".\\mvnw.cmd",
+            "args": [
+                "-DskipTests",
+                "compile"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\PERIBACKEND"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$maven"
+            ]
+        }
+    ]
+}

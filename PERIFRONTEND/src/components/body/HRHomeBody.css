@@ -1,0 +1,38 @@
+.employee-body-container {
+    padding: 40px;
+    flex: 1;
+    background: #ffffff;
+}
+
+.employee-body-container h1 {
+    color: #0d6efd;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.employee-body-container p {
+    color: #555;
+    max-width: 600px;
+}
+
+.feature-cards {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column ;
+    gap: 20px;
+}
+
+.card-item {
+    background: #f8f9fa;
+    border: 1px solid #dbe1ea;
+    padding: 20px;
+    border-radius: 10px;
+    width: inherit
+;
+    transition: 0.2s;
+}
+
+.card-item:hover {
+    border-color: #0d6efd;
+    transform: translateY(-3px);
+}

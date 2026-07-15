@@ -1,0 +1,203 @@
+2026-07-04T14:04:09.893+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : Starting Peri using Java 25.0.3 with PID 15760 (D:\com.serkan\PERI\PERIBACKEND\target\classes started by serka in D:\com.serkan\PERI)
+2026-07-04T14:04:09.897+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : The following 1 profile is active: "dev"
+2026-07-04T14:04:09.932+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-04T14:04:09.933+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-04T14:04:10.694+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-04T14:04:10.739+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 6 JPA repository interfaces.
+2026-07-04T14:04:11.209+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9090 (http)
+2026-07-04T14:04:11.234+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-04T14:04:11.234+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-07-04T14:04:11.281+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1347 ms
+2026-07-04T14:04:11.487+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-04T14:04:11.531+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-07-04T14:04:11.781+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-04T14:04:11.801+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-04T14:04:11.914+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5b1c8b7c
+2026-07-04T14:04:11.915+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-04T14:04:11.942+03:00  WARN 15760 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-04T14:04:11.960+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/peri]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.4
+	Default catalog/schema: peri/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-04T14:04:12.720+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-04T14:04:12.781+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T14:04:12.827+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-04T14:04:12.947+03:00 ERROR 15760 --- [PERI] [restartedMain] [                                                 ] t.s.DeferredServletContainerInitializers : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'authenticationTokenFilter': Unsatisfied dependency expressed through field 'usersDetailsService': Error creating bean with name 'usersDetailsService' defined in file [D:\com.serkan\PERI\PERIBACKEND\target\classes\com\serkan\peri\configuration\securityconfiguration\UsersDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'usersService' defined in file [D:\com.serkan\PERI\PERIBACKEND\target\classes\com\serkan\peri\service\user\UsersService.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'com.serkan.peri.mapstruct.RecordUserReqDtoMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-07-04T14:04:12.959+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-07-04T14:04:12.962+03:00  WARN 15760 --- [PERI] [restartedMain] [                                                 ] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:271)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1803)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1166)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:883)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1016)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1076)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+ java.base/java.lang.Thread.run(Thread.java:1474)
+2026-07-04T14:04:12.962+03:00  WARN 15760 --- [PERI] [restartedMain] [                                                 ] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [HikariPool-1:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:271)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1803)
+ java.base/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1015)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1076)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+ java.base/java.lang.Thread.run(Thread.java:1474)
+2026-07-04T14:04:12.964+03:00  WARN 15760 --- [PERI] [restartedMain] [                                                 ] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-07-04T14:04:12.965+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T14:04:12.966+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-04T14:04:12.969+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-04T14:04:12.971+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] i.o.sdk.logs.SdkLoggerProvider           : Calling shutdown() multiple times.
+2026-07-04T14:04:12.971+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] i.o.sdk.trace.SdkTracerProvider          : Calling shutdown() multiple times.
+2026-07-04T14:04:12.980+03:00  INFO 15760 --- [PERI] [restartedMain] [                                                 ] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-04T14:04:12.990+03:00 ERROR 15760 --- [PERI] [restartedMain] [                                                 ] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of constructor in com.serkan.peri.service.user.UsersService required a bean of type 'com.serkan.peri.mapstruct.RecordUserReqDtoMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.serkan.peri.mapstruct.RecordUserReqDtoMapper' in your configuration.
+
+2026-07-04T14:05:48.865+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : Starting Peri using Java 25.0.3 with PID 20800 (D:\com.serkan\PERI\PERIBACKEND\target\classes started by serka in D:\com.serkan\PERI)
+2026-07-04T14:05:48.867+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : The following 1 profile is active: "dev"
+2026-07-04T14:05:48.896+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-04T14:05:48.896+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-04T14:05:49.552+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-04T14:05:49.594+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 6 JPA repository interfaces.
+2026-07-04T14:05:49.981+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9090 (http)
+2026-07-04T14:05:49.989+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-04T14:05:49.989+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-07-04T14:05:50.023+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1126 ms
+2026-07-04T14:05:50.189+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-04T14:05:50.211+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-07-04T14:05:50.400+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-04T14:05:50.414+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-04T14:05:50.500+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d3b3c5d
+2026-07-04T14:05:50.501+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-04T14:05:50.517+03:00  WARN 20800 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-04T14:05:50.529+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/peri]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.4
+	Default catalog/schema: peri/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-04T14:05:51.157+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-04T14:05:51.198+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T14:05:51.229+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-04T14:05:51.474+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name usersDetailsService
+2026-07-04T14:05:51.564+03:00  WARN 20800 --- [PERI] [restartedMain] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-04T14:05:51.707+03:00 DEBUG 20800 --- [PERI] [restartedMain] [                                                 ] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, AuthenticationTokenFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-07-04T14:05:52.081+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-07-04T14:05:52.131+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 9090 (http) with context path '/'
+2026-07-04T14:05:52.136+03:00  INFO 20800 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : Started Peri in 3.473 seconds (process running for 3.852)
+2026-07-04T14:05:52.139+03:00  WARN 20800 --- [PERI] [restartedMain] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-07-04T14:05:52.141+03:00  WARN 20800 --- [PERI] [restartedMain] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-07-04T14:05:55.033+03:00  INFO 20800 --- [PERI] [RMI TCP Connection(2)-127.0.0.1] [                                                 ] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-04T14:05:55.034+03:00  INFO 20800 --- [PERI] [RMI TCP Connection(2)-127.0.0.1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-04T14:05:55.035+03:00  INFO 20800 --- [PERI] [RMI TCP Connection(2)-127.0.0.1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-04T15:30:47.489+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : Starting Peri using Java 25.0.3 with PID 32212 (D:\com.serkan\PERI\PERIBACKEND\target\classes started by serka in D:\com.serkan\PERI)
+2026-07-04T15:30:47.492+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : The following 1 profile is active: "dev"
+2026-07-04T15:30:47.521+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-04T15:30:47.522+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-04T15:30:48.168+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-04T15:30:48.210+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 6 JPA repository interfaces.
+2026-07-04T15:30:48.608+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9090 (http)
+2026-07-04T15:30:48.617+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-04T15:30:48.617+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-07-04T15:30:48.660+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1138 ms
+2026-07-04T15:30:48.824+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-04T15:30:48.846+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-07-04T15:30:49.036+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-04T15:30:49.050+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-04T15:30:49.138+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@54a8f2fa
+2026-07-04T15:30:49.140+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-04T15:30:49.155+03:00  WARN 32212 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-04T15:30:49.167+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/peri]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.4
+	Default catalog/schema: peri/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-04T15:30:49.798+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-04T15:30:49.842+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T15:30:49.875+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-04T15:30:49.999+03:00 ERROR 32212 --- [PERI] [restartedMain] [                                                 ] t.s.DeferredServletContainerInitializers : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'authenticationTokenFilter': Unsatisfied dependency expressed through field 'usersDetailsService': Error creating bean with name 'usersDetailsService' defined in file [D:\com.serkan\PERI\PERIBACKEND\target\classes\com\serkan\peri\configuration\securityconfiguration\UsersDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'usersService' defined in file [D:\com.serkan\PERI\PERIBACKEND\target\classes\com\serkan\peri\service\user\UsersService.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'com.serkan.peri.mapstruct.RecordUserReqDtoMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-07-04T15:30:50.014+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-07-04T15:30:50.015+03:00  WARN 32212 --- [PERI] [restartedMain] [                                                 ] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:271)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1803)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1166)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:883)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1016)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1076)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+ java.base/java.lang.Thread.run(Thread.java:1474)
+2026-07-04T15:30:50.015+03:00  WARN 32212 --- [PERI] [restartedMain] [                                                 ] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [HikariPool-1:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:271)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1803)
+ java.base/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1015)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1076)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+ java.base/java.lang.Thread.run(Thread.java:1474)
+2026-07-04T15:30:50.017+03:00  WARN 32212 --- [PERI] [restartedMain] [                                                 ] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-07-04T15:30:50.017+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T15:30:50.018+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-04T15:30:50.022+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-04T15:30:50.024+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] i.o.sdk.logs.SdkLoggerProvider           : Calling shutdown() multiple times.
+2026-07-04T15:30:50.024+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] i.o.sdk.trace.SdkTracerProvider          : Calling shutdown() multiple times.
+2026-07-04T15:30:50.033+03:00  INFO 32212 --- [PERI] [restartedMain] [                                                 ] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-04T15:30:50.049+03:00 ERROR 32212 --- [PERI] [restartedMain] [                                                 ] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of constructor in com.serkan.peri.service.user.UsersService required a bean of type 'com.serkan.peri.mapstruct.RecordUserReqDtoMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.serkan.peri.mapstruct.RecordUserReqDtoMapper' in your configuration.
+
