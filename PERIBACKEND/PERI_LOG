@@ -2438,3 +2438,40 @@ Caused by: org.postgresql.util.PSQLException: The server requested SCRAM-based a
 2026-07-16T18:14:05.797+03:00  INFO 38840 --- [PERI] [SpringApplicationShutdownHook] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-07-16T18:14:05.799+03:00  INFO 38840 --- [PERI] [SpringApplicationShutdownHook] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-07-16T18:14:05.800+03:00  INFO 38840 --- [PERI] [SpringApplicationShutdownHook] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-16T19:08:08.001+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : Starting Peri using Java 25.0.3 with PID 28208 (D:\com.serkan\PERI\PERIBACKEND\target\classes started by serka in D:\com.serkan\PERI\PERIBACKEND)
+2026-07-16T19:08:08.001+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : The following 1 profile is active: "dev"
+2026-07-16T19:08:08.309+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-16T19:08:08.335+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 9 JPA repository interfaces.
+2026-07-16T19:08:08.483+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9090 (http)
+2026-07-16T19:08:08.484+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-16T19:08:08.484+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-07-16T19:08:08.515+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 509 ms
+2026-07-16T19:08:08.578+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-16T19:08:08.604+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-16T19:08:08.605+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2026-07-16T19:08:08.657+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@93bdf32
+2026-07-16T19:08:08.657+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2026-07-16T19:08:08.663+03:00  WARN 28208 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-16T19:08:08.669+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/peri]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.4
+	Default catalog/schema: peri/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-16T19:08:08.918+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-16T19:08:08.945+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-16T19:08:09.103+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name usersDetailsService
+2026-07-16T19:08:09.163+03:00  WARN 28208 --- [PERI] [restartedMain] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-16T19:08:09.219+03:00 DEBUG 28208 --- [PERI] [restartedMain] [                                                 ] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, AuthenticationTokenFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-07-16T19:08:09.417+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-07-16T19:08:09.439+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 9090 (http) with context path '/'
+2026-07-16T19:08:09.447+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] com.serkan.peri.Peri                     : Started Peri in 1.49 seconds (process running for 27693.803)
+2026-07-16T19:08:09.448+03:00  WARN 28208 --- [PERI] [restartedMain] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-07-16T19:08:09.449+03:00  WARN 28208 --- [PERI] [restartedMain] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-07-16T19:08:09.451+03:00  INFO 28208 --- [PERI] [restartedMain] [                                                 ] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

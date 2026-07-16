@@ -1,0 +1,125 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION }}
+  ARTIFACT_REPOSITORY: ${{ vars.GCP_ARTIFACT_REPOSITORY }}
+  BACKEND_SERVICE: ${{ vars.GCP_BACKEND_SERVICE }}
+  FRONTEND_SERVICE: ${{ vars.GCP_FRONTEND_SERVICE }}
+  GAR_HOST: ${{ vars.GCP_REGION }}-docker.pkg.dev
+  DB_URL: ${{ secrets.DB_URL }}
+  DB_USERNAME: ${{ secrets.DB_USERNAME }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+  MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+  APP_JWT_SECRET: ${{ secrets.APP_JWT_SECRET }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Ensure Artifact Registry repository exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! gcloud artifacts repositories describe "$ARTIFACT_REPOSITORY" --location "$REGION" >/dev/null 2>&1; then
+            gcloud artifacts repositories create "$ARTIFACT_REPOSITORY" \
+              --repository-format=docker \
+              --location "$REGION" \
+              --description="PERI container images"
+          fi
+
+      - name: Configure Docker for Artifact Registry
+        shell: bash
+        run: gcloud auth configure-docker "$GAR_HOST" --quiet
+
+      - name: Build and push backend image
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKEND_IMAGE="$GAR_HOST/$PROJECT_ID/$ARTIFACT_REPOSITORY/peri-backend:${GITHUB_SHA}"
+          docker build \
+            -t "$BACKEND_IMAGE" \
+            ./PERIBACKEND
+          docker push "$BACKEND_IMAGE"
+          echo "BACKEND_IMAGE=$BACKEND_IMAGE" >> "$GITHUB_ENV"
+
+      - name: Deploy backend to Cloud Run
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud run deploy "$BACKEND_SERVICE" \
+            --image "$BACKEND_IMAGE" \
+            --region "$REGION" \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 9090 \
+            --set-env-vars "DB_URL=$DB_URL,DB_USERNAME=$DB_USERNAME,DB_PASSWORD=$DB_PASSWORD,MAIL_USERNAME=$MAIL_USERNAME,MAIL_PASSWORD=$MAIL_PASSWORD,MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=$APP_JWT_SECRET,APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,APP_BASE_URL_BACKEND=,APP_BASE_URL_FRONTEND=,uploaddirectory=/tmp/uploaded"
+
+      - name: Read backend URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKEND_URL="$(gcloud run services describe "$BACKEND_SERVICE" --region "$REGION" --format='value(status.url)')"
+          echo "BACKEND_URL=$BACKEND_URL" >> "$GITHUB_ENV"
+
+      - name: Build and push frontend image
+        shell: bash
+        run: |
+          set -euo pipefail
+          FRONTEND_IMAGE="$GAR_HOST/$PROJECT_ID/$ARTIFACT_REPOSITORY/peri-frontend:${GITHUB_SHA}"
+          docker build \
+            --build-arg "VITE_API_BASE_URL=$BACKEND_URL" \
+            -t "$FRONTEND_IMAGE" \
+            ./PERIFRONTEND
+          docker push "$FRONTEND_IMAGE"
+          echo "FRONTEND_IMAGE=$FRONTEND_IMAGE" >> "$GITHUB_ENV"
+
+      - name: Deploy frontend to Cloud Run
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud run deploy "$FRONTEND_SERVICE" \
+            --image "$FRONTEND_IMAGE" \
+            --region "$REGION" \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 80
+
+      - name: Read frontend URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          FRONTEND_URL="$(gcloud run services describe "$FRONTEND_SERVICE" --region "$REGION" --format='value(status.url)')"
+          echo "FRONTEND_URL=$FRONTEND_URL" >> "$GITHUB_ENV"
+
+      - name: Update backend base URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud run services update "$BACKEND_SERVICE" \
+            --region "$REGION" \
+            --set-env-vars "DB_URL=$DB_URL,DB_USERNAME=$DB_USERNAME,DB_PASSWORD=$DB_PASSWORD,MAIL_USERNAME=$MAIL_USERNAME,MAIL_PASSWORD=$MAIL_PASSWORD,MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=$APP_JWT_SECRET,APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,APP_BASE_URL_BACKEND=$BACKEND_URL,APP_BASE_URL_FRONTEND=$FRONTEND_URL,uploaddirectory=/tmp/uploaded"
