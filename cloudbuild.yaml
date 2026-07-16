@@ -1,0 +1,113 @@
+substitutions:
+  _REGION: europe-west1
+  _ARTIFACT_REPOSITORY: peri
+  _BACKEND_SERVICE: peri-backend
+  _FRONTEND_SERVICE: peri-frontend
+  _DB_URL: ""
+  _DB_USERNAME: ""
+  _DB_PASSWORD: ""
+  _MAIL_USERNAME: ""
+  _MAIL_PASSWORD: ""
+  _APP_JWT_SECRET: ""
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    id: Build backend image
+    args:
+      [
+        "build",
+        "-t",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-backend:$SHORT_SHA",
+        "-f",
+        "PERIBACKEND/Dockerfile",
+        "PERIBACKEND",
+      ]
+
+  - name: gcr.io/cloud-builders/docker
+    id: Push backend image
+    args:
+      [
+        "push",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-backend:$SHORT_SHA",
+      ]
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: Deploy backend
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        gcloud run deploy "${_BACKEND_SERVICE}" \
+          --image "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-backend:$SHORT_SHA" \
+          --region "${_REGION}" \
+          --platform managed \
+          --allow-unauthenticated \
+          --port 9090 \
+          --set-env-vars "DB_URL=${_DB_URL},DB_USERNAME=${_DB_USERNAME},DB_PASSWORD=${_DB_PASSWORD},MAIL_USERNAME=${_MAIL_USERNAME},MAIL_PASSWORD=${_MAIL_PASSWORD},MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=${_APP_JWT_SECRET},APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,uploaddirectory=/tmp/uploaded"
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: Read backend URL
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        BACKEND_URL="$(gcloud run services describe "${_BACKEND_SERVICE}" --region "${_REGION}" --format='value(status.url)')"
+        printf 'BACKEND_URL=%s\n' "$BACKEND_URL" | tee /workspace/backend-url.env
+
+  - name: gcr.io/cloud-builders/docker
+    id: Build frontend image
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        source /workspace/backend-url.env
+        docker build \
+          --build-arg "VITE_API_BASE_URL=${BACKEND_URL}" \
+          -t "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-frontend:$SHORT_SHA" \
+          -f "PERIFRONTEND/Dockerfile" \
+          "PERIFRONTEND"
+
+  - name: gcr.io/cloud-builders/docker
+    id: Push frontend image
+    args:
+      [
+        "push",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-frontend:$SHORT_SHA",
+      ]
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: Deploy frontend
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        gcloud run deploy "${_FRONTEND_SERVICE}" \
+          --image "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-frontend:$SHORT_SHA" \
+          --region "${_REGION}" \
+          --platform managed \
+          --allow-unauthenticated \
+          --port 80
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: Read frontend URL
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        FRONTEND_URL="$(gcloud run services describe "${_FRONTEND_SERVICE}" --region "${_REGION}" --format='value(status.url)')"
+        printf 'FRONTEND_URL=%s\n' "$FRONTEND_URL" | tee /workspace/frontend-url.env
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: Update backend URLs
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        source /workspace/backend-url.env
+        source /workspace/frontend-url.env
+        gcloud run services update "${_BACKEND_SERVICE}" \
+        --region "${_REGION}" \
+        --set-env-vars "DB_URL=${_DB_URL},DB_USERNAME=${_DB_USERNAME},DB_PASSWORD=${_DB_PASSWORD},MAIL_USERNAME=${_MAIL_USERNAME},MAIL_PASSWORD=${_MAIL_PASSWORD},MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=${_APP_JWT_SECRET},APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,APP_BASE_URL_BACKEND=${BACKEND_URL},APP_BASE_URL_FRONTEND=${FRONTEND_URL},uploaddirectory=/tmp/uploaded"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
