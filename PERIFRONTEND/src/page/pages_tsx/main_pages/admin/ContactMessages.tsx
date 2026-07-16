@@ -4,6 +4,7 @@ import Header from "../../../../components/header/Header";
 import Footer from "../../../../components/footer/Footer";
 import "../Application/App.css";
 import "./ContactMessages.css";
+import { API_BASE_URL } from "../../../../tools/api";
 
 type ContactMessage = {
     id: string;
@@ -24,7 +25,7 @@ export default function ContactMessages() {
 
     useEffect(() => {
         if (!token) { navigate("/signin"); return; }
-        fetch("http://localhost:9090/dev/v1/systemadministrator/contact-messages", {
+        fetch(`${API_BASE_URL}/dev/v1/systemadministrator/contact-messages`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(r => r.json())
@@ -34,7 +35,7 @@ export default function ContactMessages() {
     }, []);
 
     const markRead = async (id: string) => {
-        await fetch(`http://localhost:9090/dev/v1/systemadministrator/contact-messages/${id}/read`, {
+        await fetch(`${API_BASE_URL}/dev/v1/systemadministrator/contact-messages/${id}/read`, {
             method: "PATCH",
             headers: { Authorization: `Bearer ${token}` }
         });

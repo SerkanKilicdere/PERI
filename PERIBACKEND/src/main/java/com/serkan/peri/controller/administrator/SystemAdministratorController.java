@@ -22,6 +22,7 @@ import com.serkan.peri.utility.emailsender.SystemAdministratorEmailService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,6 +50,8 @@ public class SystemAdministratorController {
     private final ContactMessageRepository contactMessageRepository;
     private final QuoteRequestRepository quoteRequestRepository;
 
+    @Value("${app.base-url-frontend:http://localhost:5173}")
+    private String baseUrlFrontEnd;
 
 
 
@@ -58,9 +61,9 @@ public class SystemAdministratorController {
 
         if (isValid) {
             // Doğrudan gitmek istediğiniz URL string'ini yazıyorsunuz
-            return new RedirectView("http://localhost:5173/registercompany?token=" + token);
+            return new RedirectView(baseUrlFrontEnd + "/registercompany?token=" + token);
         } else {
-            return new RedirectView("http://localhost:5173/verification-error");
+            return new RedirectView(baseUrlFrontEnd + "/verification-error");
         }
     }
 

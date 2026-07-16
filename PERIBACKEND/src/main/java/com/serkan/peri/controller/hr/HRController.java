@@ -14,6 +14,7 @@ import com.serkan.peri.utility.emailsender.CompanyAdministratorEmailSenderReposi
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,8 @@ public class HRController {
     private final PasswordEncoder passwordEncoder;
     private final CompanyAdministratorEmailService companyAdministratorEmailService;
 
+    @Value("${app.base-url-frontend:http://localhost:5173}")
+    private String baseUrlFrontEnd;
 
 
 
@@ -72,10 +75,9 @@ public class HRController {
         boolean isValid = companyAdministratorEmailService.verifyTokenAndActivateUser(token);
 
         if (isValid) {
-           
-            return new RedirectView("http://localhost:5173/register?token=" + token);
+            return new RedirectView(baseUrlFrontEnd + "/register?token=" + token);
         } else {
-            return new RedirectView("http://localhost:5173/dev/v1/error-page");
+            return new RedirectView(baseUrlFrontEnd + "/dev/v1/error-page");
         }
     }
 

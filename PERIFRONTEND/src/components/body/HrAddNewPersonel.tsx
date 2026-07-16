@@ -1,6 +1,7 @@
 import "./HrAddNewPersonel.css";
 import * as React from "react";
 import {useState} from "react";
+import { API_BASE_URL } from "../../tools/api";
 
 export default function HrAddNewPersonel() {
 
@@ -16,7 +17,7 @@ export default function HrAddNewPersonel() {
 
 
         try {
-            const response = await fetch("http://localhost:9090/dev/v1/humanresource/recorduser", {
+            const response = await fetch(`${API_BASE_URL}/dev/v1/humanresource/recorduser`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

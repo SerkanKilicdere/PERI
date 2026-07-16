@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../../../components/header/Header";
 import Footer from "../../../../components/footer/Footer";
 import UserProfileSidebar from "../../../../components/sidebar/UserProfileSidebar";
+import { API_BASE_URL } from "../../../../tools/api";
 import "../Application/App.css";
 import "./UserProfile.css";
 
@@ -73,7 +74,7 @@ export default function UserProfile() {
             }
 
             try {
-                const response = await fetch("http://localhost:9090/dev/v1/user/profile", {
+                const response = await fetch(`${API_BASE_URL}/dev/v1/user/profile`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -124,7 +125,7 @@ export default function UserProfile() {
 
         setIsSaving(true);
         try {
-            const response = await fetch("http://localhost:9090/dev/v1/user/profile", {
+            const response = await fetch(`${API_BASE_URL}/dev/v1/user/profile`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import Header from "../../../../components/header/Header";
 import Footer from "../../../../components/footer/Footer";
 import "../Application/App.css";
 import "./QuoteRequests.css";
+import { API_BASE_URL } from "../../../../tools/api";
 
 type QuoteRequest = {
     id: string;
@@ -28,7 +29,7 @@ export default function QuoteRequests() {
 
     useEffect(() => {
         if (!token) { navigate("/signin"); return; }
-        fetch("http://localhost:9090/dev/v1/systemadministrator/quote-requests", {
+        fetch(`${API_BASE_URL}/dev/v1/systemadministrator/quote-requests`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(r => r.json())
@@ -38,7 +39,7 @@ export default function QuoteRequests() {
     }, []);
 
     const markRead = async (id: string) => {
-        await fetch(`http://localhost:9090/dev/v1/systemadministrator/quote-requests/${id}/read`, {
+        await fetch(`${API_BASE_URL}/dev/v1/systemadministrator/quote-requests/${id}/read`, {
             method: "PATCH",
             headers: { Authorization: `Bearer ${token}` }
         });

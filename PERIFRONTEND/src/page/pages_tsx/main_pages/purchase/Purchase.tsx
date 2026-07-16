@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import type { Variants } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../../../tools/api";
 
 export default function Purchase() {
     const GMAIL_SMTP_HOST = "smtp.gmail.com";
@@ -81,7 +82,7 @@ export default function Purchase() {
     const submitPurchase = async () => {
         setIsSubmitting(true);
         try {
-            const response = await fetch("http://localhost:9090/dev/v1/consumer/buyapplication", {
+            const response = await fetch(`${API_BASE_URL}/dev/v1/consumer/buyapplication`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

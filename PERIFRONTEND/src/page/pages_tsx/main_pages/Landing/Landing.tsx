@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Landing.css';
 import { useNavigate } from "react-router-dom";
 import type {Variants} from 'framer-motion';
+import { API_BASE_URL } from "../../../../tools/api";
 
 const Landing: React.FC = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Landing: React.FC = () => {
         e.preventDefault();
         setContactStatus("sending");
         try {
-            const response = await fetch("http://localhost:9090/dev/v1/consumer/contact", {
+            const response = await fetch(`${API_BASE_URL}/dev/v1/consumer/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fullName: contactName, senderEmail: contactEmail, message: contactMessage })
@@ -51,7 +52,7 @@ const Landing: React.FC = () => {
         e.preventDefault();
         setQuoteStatus("sending");
         try {
-            const res = await fetch("http://localhost:9090/dev/v1/consumer/quote", {
+            const res = await fetch(`${API_BASE_URL}/dev/v1/consumer/quote`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...quoteForm, employeeCount: Number(quoteForm.employeeCount) })

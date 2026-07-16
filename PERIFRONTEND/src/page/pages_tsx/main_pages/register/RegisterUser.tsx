@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import * as React from "react";
+import { API_BASE_URL } from "../../../../tools/api";
 
 export default function RegisterUser() {
     const [email, setEmail] = useState("");
@@ -69,7 +70,7 @@ export default function RegisterUser() {
         }
 
         try {
-            const response = await fetch("http://localhost:9090/dev/v1/humanresource/register", {
+            const response = await fetch(`${API_BASE_URL}/dev/v1/humanresource/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
