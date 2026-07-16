@@ -3,7 +3,7 @@ substitutions:
   _ARTIFACT_REPOSITORY: peri
   _BACKEND_SERVICE: peri-backend
   _FRONTEND_SERVICE: peri-frontend
-  _DB_URL: ""
+  _CLOUD_SQL_INSTANCE: "peri-project:europe-west1:peri-db"
   _DB_USERNAME: ""
   _DB_PASSWORD: ""
   _MAIL_USERNAME: ""
@@ -37,13 +37,18 @@ steps:
     args:
       - -ceu
       - |
+        if [[ -z "${_CLOUD_SQL_INSTANCE}" ]]; then
+          echo "Missing _CLOUD_SQL_INSTANCE substitution" >&2
+          exit 1
+        fi
         gcloud run deploy "${_BACKEND_SERVICE}" \
           --image "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REPOSITORY}/peri-backend:$SHORT_SHA" \
           --region "${_REGION}" \
           --platform managed \
           --allow-unauthenticated \
+          --add-cloudsql-instances "${_CLOUD_SQL_INSTANCE}" \
           --port 9090 \
-          --set-env-vars "DB_URL=${_DB_URL},DB_USERNAME=${_DB_USERNAME},DB_PASSWORD=${_DB_PASSWORD},MAIL_USERNAME=${_MAIL_USERNAME},MAIL_PASSWORD=${_MAIL_PASSWORD},MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=${_APP_JWT_SECRET},APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,uploaddirectory=/tmp/uploaded"
+          --set-env-vars "DB_URL=jdbc:postgresql:///peri?cloudSqlInstance=${_CLOUD_SQL_INSTANCE}&socketFactory=com.google.cloud.sql.postgres.SocketFactory,DB_USERNAME=${_DB_USERNAME},DB_PASSWORD=${_DB_PASSWORD},MAIL_USERNAME=${_MAIL_USERNAME},MAIL_PASSWORD=${_MAIL_PASSWORD},MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=${_APP_JWT_SECRET},APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,uploaddirectory=/tmp/uploaded"
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     id: Read backend URL
@@ -107,7 +112,7 @@ steps:
         source /workspace/frontend-url.env
         gcloud run services update "${_BACKEND_SERVICE}" \
         --region "${_REGION}" \
-        --set-env-vars "DB_URL=${_DB_URL},DB_USERNAME=${_DB_USERNAME},DB_PASSWORD=${_DB_PASSWORD},MAIL_USERNAME=${_MAIL_USERNAME},MAIL_PASSWORD=${_MAIL_PASSWORD},MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=${_APP_JWT_SECRET},APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,APP_BASE_URL_BACKEND=${BACKEND_URL},APP_BASE_URL_FRONTEND=${FRONTEND_URL},uploaddirectory=/tmp/uploaded"
+        --set-env-vars "DB_URL=jdbc:postgresql:///peri?cloudSqlInstance=${_CLOUD_SQL_INSTANCE}&socketFactory=com.google.cloud.sql.postgres.SocketFactory,DB_USERNAME=${_DB_USERNAME},DB_PASSWORD=${_DB_PASSWORD},MAIL_USERNAME=${_MAIL_USERNAME},MAIL_PASSWORD=${_MAIL_PASSWORD},MAIL_HOST=smtp.gmail.com,MAIL_PORT=587,APP_JWT_SECRET=${_APP_JWT_SECRET},APP_JWT_ISSUER=PERI,APP_JWT_DURATION_MS=600000,APP_BASE_URL_BACKEND=${BACKEND_URL},APP_BASE_URL_FRONTEND=${FRONTEND_URL},uploaddirectory=/tmp/uploaded"
 
 options:
   logging: CLOUD_LOGGING_ONLY
